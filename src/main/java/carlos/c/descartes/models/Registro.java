@@ -12,7 +12,11 @@ public class Registro {
     }
 
     public void addBaseDatos(){
-        baseDeDatos.addStudent(estudiantes);
+        baseDeDatos.saveStudent(estudiantes);
+    }
+
+    public void update(){
+        baseDeDatos.updateStudent(estudiantes);
     }
 
     public ArrayList<Student> getEstudiantes() {

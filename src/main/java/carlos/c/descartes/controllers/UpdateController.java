@@ -86,14 +86,12 @@ public class UpdateController {
                     if (name.equals(student.getName())) {
                         student.setFirstName(apellido);
                         student.setMatricula(matricula);
+                        registro.update();
                         estudianteEncontrado = true;
                         nombreStudent.clear();
                         apellidoStudent.clear();
                         matriculaStudent.clear();
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setHeaderText(null);
-                        alert.setContentText("¡Los datos sean actualizado correctamente!.");
-                        alert.showAndWait();
+
                     } else {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setHeaderText(null);
