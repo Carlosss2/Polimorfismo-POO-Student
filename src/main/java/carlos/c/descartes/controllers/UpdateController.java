@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import carlos.c.descartes.App;
 import carlos.c.descartes.models.Registro;
+import carlos.c.descartes.models.SQLite;
 import carlos.c.descartes.models.Student;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -42,7 +43,7 @@ public class UpdateController {
 
     @FXML
     private TableView<Student> tableView;
-
+    private Registro registro = App.getRegistro();
     @FXML
     void onMouseClickSalirButton(MouseEvent event) {
         Stage stage = (Stage) nombreStudent.getScene().getWindow();
@@ -52,10 +53,10 @@ public class UpdateController {
 
     @FXML
     void onMouseClickRevisarButton(MouseEvent event) {
-        Registro registro = App.getRegistro();
-        if (!registro.getEstudiantes().isEmpty()) {
-            tableView.getItems().clear();
-            tableView.getItems().addAll(registro.getEstudiantes());
+
+        SQLite sqLite=new SQLite();
+        if (registro !=null&&registro.getMySQL()!=null&&registro.getMySQL().getEstudiantes()!=null) {
+            tableView.getItems().addAll(registro.getMySQL().getEstudiantes());
 
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -69,7 +70,6 @@ public class UpdateController {
 
     @FXML
     void onMouseClickUpdateButton(MouseEvent event) {
-        Registro registro = App.getRegistro();
         String name = nombreStudent.getText();
         String apellido = apellidoStudent.getText();
         String matricula = matriculaStudent.getText();
@@ -80,13 +80,12 @@ public class UpdateController {
             alert.setContentText("Rellene los campos correctamente.");
             alert.showAndWait();
         } else {
-            if (!registro.getEstudiantes().isEmpty()) {
-                boolean estudianteEncontrado = false;
-                for (Student student : registro.getEstudiantes()) {
+            boolean estudianteEncontrado = false;
+                for (Student student : tableView.getItems()) {
                     if (name.equals(student.getName())) {
                         student.setFirstName(apellido);
                         student.setMatricula(matricula);
-                        registro.update();
+                        registro.update(student);
                         estudianteEncontrado = true;
                         nombreStudent.clear();
                         apellidoStudent.clear();
@@ -103,14 +102,9 @@ public class UpdateController {
                 }
                 if (estudianteEncontrado) {
                     tableView.getItems().clear();
-                    tableView.getItems().addAll(registro.getEstudiantes());
+                    tableView.getItems().addAll(registro.getMySQL().getEstudiantes());
                 }
-            } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("No se ha podido actualizar, la lista se encuentra vacia.");
-                alert.showAndWait();
-            }
+
         }
 
     }

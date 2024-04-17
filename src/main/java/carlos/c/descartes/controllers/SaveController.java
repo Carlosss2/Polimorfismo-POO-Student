@@ -1,6 +1,5 @@
 package carlos.c.descartes.controllers;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,6 +28,7 @@ public class SaveController {
     @FXML
     private TextField nombreStudent;
 
+    private Registro registro = App.getRegistro();
 
     @FXML
     void onMouseClickSalirButton(MouseEvent event) {
@@ -38,20 +38,38 @@ public class SaveController {
 
     @FXML
     void onMouseClickSaveButton(MouseEvent event) {
-        String name = nombreStudent.getText();
-        String firstName = apellidoStudent.getText();
-        String matricula = matriculaStudent.getText();
-        Student student=new Student(name,firstName,matricula );
-        App.getRegistro().addAlumno(student);
-        App.getRegistro().addBaseDatos();
+        if (registro != null) {
+            String name = nombreStudent.getText();
+            String firstName = apellidoStudent.getText();
+            String matricula = matriculaStudent.getText();
+            Student student = new Student(name, firstName, matricula);
+
+            try {
+                if (registro.getSqLite() != null) {
+                    registro.getSqLite().saveStudent(student);
+                    System.out.println("Estudiante guardado exitosamente en todas las bases de datos.");
+                }
+                if (registro.getSql() != null) {
+                    registro.getSql().saveStudent(student);
+                    System.out.println("Estudiante guardado exitosamente en todas las bases de datos.");
+                }
+                if (registro.getMySQL() != null) {
+                    registro.getMySQL().saveStudent(student);
+                    System.out.println("Estudiante guardado exitosamente en todas las bases de datos.");
+                }
 
 
+            } catch (Exception e) {
+                System.err.println("Error al guardar el estudiante: " + e.getMessage());
+            }
+        } else {
+
+            System.err.println("La instancia de Registro no ha sido inicializada correctamente.");
+        }
     }
 
     @FXML
     void initialize() {
 
     }
-
 }
-

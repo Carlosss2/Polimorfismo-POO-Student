@@ -1,5 +1,6 @@
 package carlos.c.descartes;
 
+import carlos.c.descartes.models.IBaseDeDatos;
 import carlos.c.descartes.models.Registro;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +10,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class App extends Application {
-    public static Registro registro=new Registro();
+    public static IBaseDeDatos baseDeDatos;
+    public static Registro registro=new Registro(baseDeDatos);
     public static Registro getRegistro(){
         return registro;
     }
