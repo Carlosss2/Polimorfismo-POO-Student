@@ -40,6 +40,8 @@ public class UpdateController {
 
     @FXML
     private TextField nombreStudent;
+    @FXML
+    private TextField nuevoNombreStudent;
 
     @FXML
     private TableView<Student> tableView;
@@ -73,7 +75,7 @@ public class UpdateController {
         String name = nombreStudent.getText();
         String apellido = apellidoStudent.getText();
         String matricula = matriculaStudent.getText();
-
+        String newName= nuevoNombreStudent.getText();
         if (name.isEmpty() || apellido.isEmpty() || matricula.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
@@ -83,6 +85,7 @@ public class UpdateController {
             boolean estudianteEncontrado = false;
                 for (Student student : tableView.getItems()) {
                     if (name.equals(student.getName())) {
+                        student.setName(newName);
                         student.setFirstName(apellido);
                         student.setMatricula(matricula);
                         registro.update(student);

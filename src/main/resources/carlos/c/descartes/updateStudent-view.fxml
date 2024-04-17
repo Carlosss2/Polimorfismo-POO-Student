@@ -64,7 +64,7 @@
             <Font name="Tahoma" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="nombreStudent" layoutX="103.0" layoutY="132.0" prefHeight="32.0" prefWidth="212.0" style="-fx-border-width: 3; -fx-border-radius: 8; -fx-border-color: #36a1ff;" />
+      <TextField fx:id="nombreStudent" layoutX="140.0" layoutY="95.0" prefHeight="32.0" prefWidth="187.0" style="-fx-border-width: 3; -fx-border-radius: 8; -fx-border-color: #36a1ff;" />
       <TextField fx:id="apellidoStudent" layoutX="103.0" layoutY="172.0" prefHeight="32.0" prefWidth="212.0" style="-fx-border-color: #36a1ff; -fx-border-width: 3; -fx-border-radius: 8;" />
       <TextField fx:id="matriculaStudent" layoutX="103.0" layoutY="216.0" prefHeight="32.0" prefWidth="212.0" style="-fx-border-color: #36a1ff; -fx-border-width: 3; -fx-border-radius: 8;" />
       <Label layoutX="18.0" layoutY="277.0" text="*Es importante llenar todos los campos" />
@@ -80,5 +80,11 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
+      <TextField fx:id="nuevoNombreStudent" layoutX="103.0" layoutY="132.0" prefHeight="32.0" prefWidth="212.0" style="-fx-border-width: 3; -fx-border-radius: 8; -fx-border-color: #36a1ff;" />
+      <Label layoutX="21.0" layoutY="95.0" prefHeight="32.0" prefWidth="119.0" text="Nombre a buscar:">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
